@@ -67,10 +67,11 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i8.RemoteSpellsDataSource>(),
           gh<_i6.LocalSpellsDataSource>(),
         ));
-    gh.lazySingleton<_i11.CharactersRepository>(() => _i12.FeedRepositoryImpl(
-          gh<_i7.RemoteCharactersDataSource>(),
-          gh<_i5.LocalCharactersDataSource>(),
-        ));
+    gh.lazySingleton<_i11.CharactersRepository>(
+        () => _i12.CharactersRepositoryImpl(
+              gh<_i7.RemoteCharactersDataSource>(),
+              gh<_i5.LocalCharactersDataSource>(),
+            ));
     gh.factory<_i13.FetchAllCharacters>(
         () => _i13.FetchAllCharacters(gh<_i11.CharactersRepository>()));
     gh.factory<_i14.FetchSpells>(

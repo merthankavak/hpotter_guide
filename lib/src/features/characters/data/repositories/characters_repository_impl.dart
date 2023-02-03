@@ -9,11 +9,11 @@ import '../datasources/local_characters_datasource.dart';
 import '../datasources/remote_characters_datasource.dart';
 
 @LazySingleton(as: CharactersRepository)
-class FeedRepositoryImpl implements CharactersRepository {
+class CharactersRepositoryImpl implements CharactersRepository {
   final RemoteCharactersDataSource remoteCharactersDataSource;
   final LocalCharactersDataSource localCharactersDataSource;
 
-  FeedRepositoryImpl(this.remoteCharactersDataSource, this.localCharactersDataSource);
+  CharactersRepositoryImpl(this.remoteCharactersDataSource, this.localCharactersDataSource);
 
   @override
   Future<Either<Failures, List<Character>>> fetchAllCharacters() async {
