@@ -36,21 +36,21 @@ class CharactersRepositoryImpl implements CharactersRepository {
 
   @override
   Future<Either<Failures, List<Character>>> searchCharacter(String characterName) async {
-    if ((await localCharactersDataSource.fetchAllCharacters()).isEmpty) {
-      final characters = await remoteCharactersDataSource.searchCharacter(characterName);
-      if (characters.isNotEmpty) {
-        return Right(characters);
+    final characters = await fetchAllCharacters();
+
+    if (characters.isRight()) {
+      final searchResult = characters
+          .getOrElse(() => [])
+          .where((character) => character.name!.toLowerCase().contains(characterName.toLowerCase()))
+          .toList();
+
+      if (searchResult.isNotEmpty) {
+        return Right(searchResult);
       } else {
         return const Left(NotFoundFailure());
       }
     } else {
-      final characters = await localCharactersDataSource.searchCharacter(characterName);
-
-      if (characters.isNotEmpty) {
-        return Right(characters);
-      } else {
-        return const Left(NotFoundFailure());
-      }
+      return characters;
     }
   }
 }

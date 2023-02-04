@@ -7,7 +7,6 @@ import '../../../../shared/domain/entities/spells/spells.dart';
 abstract class LocalSpellsDataSource {
   Future<void> addSpells(Spells spell);
   Future<List<Spells>> fetchSpells();
-  Future<List<Spells>> searchSpell(String spellName);
 }
 
 @LazySingleton(as: LocalSpellsDataSource)
@@ -24,14 +23,6 @@ class LocalSpellsDataSourceImpl implements LocalSpellsDataSource {
   Future<List<Spells>> fetchSpells() async {
     Box<SpellsModel> box = await _openBox() as Box<SpellsModel>;
     return box.values.toList().map((character) => character.toEntity()).toList();
-  }
-
-  @override
-  Future<List<Spells>> searchSpell(String spellName) async {
-    final spellsList = await fetchSpells();
-    return spellsList
-        .where((spell) => spell.name!.toLowerCase().contains(spellName.toLowerCase()))
-        .toList();
   }
 
   Future<Box> _openBox() async {
