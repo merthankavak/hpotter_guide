@@ -7,7 +7,6 @@ import '../../../../shared/domain/entities/character/character.dart';
 
 abstract class RemoteCharactersDataSource {
   Future<List<Character>> fetchAllCharacters();
-  Future<List<Character>> searchCharacter(String characterName);
 }
 
 @LazySingleton(as: RemoteCharactersDataSource)
@@ -26,13 +25,5 @@ class RemoteCharactersDataSourceImpl implements RemoteCharactersDataSource {
         (a, b) => a.image!.isEmpty ? 1 : (b.image!.isEmpty ? -1 : a.image!.compareTo(b.image!)));
 
     return characterList;
-  }
-
-  @override
-  Future<List<Character>> searchCharacter(String characterName) async {
-    final characterList = await fetchAllCharacters();
-    return characterList
-        .where((character) => character.name!.toLowerCase().startsWith(characterName.toLowerCase()))
-        .toList();
   }
 }

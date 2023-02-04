@@ -7,7 +7,6 @@ import '../../../../shared/domain/entities/spells/spells.dart';
 
 abstract class RemoteSpellsDataSource {
   Future<List<Spells>> fetchSpells();
-  Future<List<Spells>> searchSpell(String spellName);
 }
 
 @LazySingleton(as: RemoteSpellsDataSource)
@@ -20,13 +19,5 @@ class RemoteSpellsDataSourceImpl implements RemoteSpellsDataSource {
   Future<List<Spells>> fetchSpells() async {
     final data = await dioClient.get(NetworkConstants.spells) as List;
     return List.from(data.map((item) => SpellsModel.fromJson(item).toEntity()).toList());
-  }
-
-  @override
-  Future<List<Spells>> searchSpell(String spellName) async {
-    final spellsList = await fetchSpells();
-    return spellsList
-        .where((spell) => spell.name!.toLowerCase().startsWith(spellName.toLowerCase()))
-        .toList();
   }
 }

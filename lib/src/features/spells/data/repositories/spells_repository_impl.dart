@@ -36,21 +36,21 @@ class SpellsRepositoryImpl implements SpellsRepository {
 
   @override
   Future<Either<Failures, List<Spells>>> searchSpell(String spellName) async {
-    if ((await localSpellsDataSource.fetchSpells()).isEmpty) {
-      final spells = await remoteSpellsDataSource.searchSpell(spellName);
-      if (spells.isNotEmpty) {
-        return Right(spells);
+    final spells = await fetchSpells();
+
+    if (spells.isRight()) {
+      final searchResult = spells
+          .getOrElse(() => [])
+          .where((spell) => spell.name!.toLowerCase().contains(spellName.toLowerCase()))
+          .toList();
+
+      if (searchResult.isNotEmpty) {
+        return Right(searchResult);
       } else {
         return const Left(NotFoundFailure());
       }
     } else {
-      final spells = await localSpellsDataSource.searchSpell(spellName);
-
-      if (spells.isNotEmpty) {
-        return Right(spells);
-      } else {
-        return const Left(NotFoundFailure());
-      }
+      return spells;
     }
   }
 }

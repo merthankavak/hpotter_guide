@@ -7,7 +7,6 @@ import '../../../../shared/domain/entities/character/character.dart';
 abstract class LocalCharactersDataSource {
   Future<void> addCharacter(Character character);
   Future<List<Character>> fetchAllCharacters();
-  Future<List<Character>> searchCharacter(String characterName);
 }
 
 @LazySingleton(as: LocalCharactersDataSource)
@@ -29,14 +28,6 @@ class LocalCharactersDataSourceImpl implements LocalCharactersDataSource {
         (a, b) => a.image!.isEmpty ? 1 : (b.image!.isEmpty ? -1 : a.image!.compareTo(b.image!)));
 
     return characterList;
-  }
-
-  @override
-  Future<List<Character>> searchCharacter(String characterName) async {
-    final characterList = await fetchAllCharacters();
-    return characterList
-        .where((character) => character.name!.toLowerCase().contains(characterName.toLowerCase()))
-        .toList();
   }
 
   Future<Box> _openBox() async {
