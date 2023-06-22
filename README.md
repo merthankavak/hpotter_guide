@@ -1,6 +1,6 @@
 # HPotter Guide
 
-HPotter Guide app is a flutter mobile app project I created to learn and implement clean architecture. The API I used in the project is [HP-API](https://github.com/KostaSav/hp-api).
+Developed a mobile application using Flutter that providing comprehensive information about the characters, their traits, and spells from the beloved Harry Potter series. The API I used in the project is [HP-API](https://github.com/KostaSav/hp-api).
 
 ## Libraries and Tools
 
