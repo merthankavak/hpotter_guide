@@ -84,9 +84,9 @@ flutter_gen:
      <td align="center">Search</td>
   </tr>
   <tr>
-     <td><img src="screenshots/splash.png" width=270 height=480></td>
-     <td><img src="screenshots/1.png" width=270 height=480></td>
-     <td><img src="screenshots/2.png" width=270 height=480></td>
+     <td width="33%"><img src="screenshots/splash.png" alt="Splash"></td>
+     <td width="33%"><img src="screenshots/1.png" alt="Characters"></td>
+     <td width="33%"><img src="screenshots/2.png" alt="Search"></td>
   </tr>
 </table>
 <table>
@@ -96,9 +96,9 @@ flutter_gen:
      <td align="center">Spells</td>
   </tr>
   <tr>
-     <td><img src="screenshots/3.png" width="270" height="480"></td>
-     <td><img src="screenshots/4.png" width=270 height=480></td>
-     <td><img src="screenshots/5.png" width=270 height=480></td>
+     <td width="33%"><img src="screenshots/3.png" alt="Character Details"></td>
+     <td width="33%"><img src="screenshots/4.png" alt="Custom Error Widget"></td>
+     <td width="33%"><img src="screenshots/5.png" alt="Spells"></td>
   </tr>
 </table>
 
